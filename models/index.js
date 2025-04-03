@@ -1,8 +1,10 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
+const { logger } = require('sequelize/lib/utils/logger');
 const sequelize = new Sequelize('locator', 'postgres', 'Uwineza@22', {
   host: 'localhost',
   dialect: 'postgres',
-  port: 5432
+  port: 5432,
+  logging: false,
 });
 
 const models = {

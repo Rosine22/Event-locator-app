@@ -5,8 +5,13 @@ const Backend = require('i18next-fs-backend');
 const middleware = require('i18next-http-middleware');
 const cron = require('node-cron');
 const Queue = require('bull');
-const { Event, User, UserPreference, Notification, EventCategory } = require('./models/index.js'); // Import EventCategory explicitly
-require('dotenv').config();
+const { Event, User, UserPreference, Notification, EventCategory } = require('./models/index.js');
+const categoryRoutes = require('./routes/category.routes'); // Import EventCategory explicitly
+const notificationRoutes = require('./routes/notificationRoutes');
+//const UserPreference = require('./models/UserPreference')
+require("dotenv").config();
+const jwtSecret = process.env.JWT_SECRET;
+
 
 const app = express();
 
@@ -25,7 +30,10 @@ app.use(require('./middlewares/i18n.js')); // Apply i18n globally
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes.js'));
-app.use('/api/events', require('./routes/eventRoutes.js')); // Correct route for events
+app.use('/api/events', require('./routes/eventRoutes.js')); 
+app.use('/api/categories', require('./routes/category.routes.js'));
+app.use('/notifications', require('./routes/notificationRoutes.js'));
+// app.use('/preferences', require('./routes/userPreferences.js'));
 
 // Notification Queue
 const notificationQueue = new Queue('notifications', {
@@ -93,3 +101,4 @@ cron.schedule('0 * * * *', async () => {
 sequelize.sync({ force: false }).then(() => {
   app.listen(3000, () => console.log('Server running on port 3000'));
 });
+
