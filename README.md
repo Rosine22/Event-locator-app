@@ -1,6 +1,6 @@
 # Event Locator API
 
-The Event Locator API is an amazing system for managing events, it Built with Node.js, Express, Sequelize, PostgreSQL (with PostGIS), Redis, this API allows user to register, log in, create events, categories and even get notifications of the events they created.
+The Event Locator API is an amazing system for managing events, it Built with Node.js, Express, Sequelize, PostgreSQL (with PostGIS), this API allows user to register, log in, create events, categories and even get notifications of the events they created.
 
 ## Features
 
@@ -98,18 +98,18 @@ Key endpoints include:
   **Response:**
   ```json
   {
-    "message": "Citizen welcomed successfully",
+    "message": "user registered successfully",
     "id": 1,
     "email": "user@example.com"
   }
   ```
 - **POST /users/login:** Log in and get a JWT token.
   ```bash
-  curl -X POST "http://localhost:3000/users/login?lang=fr" -d '{"email": "user@example.com", "password": "Pass23!"}' -H "Content-Type: application/json"
+  curl -X POST "http://localhost:3000/users/login '{"email": "user@example.com", "password": "Pass23!"}' -H "Content-Type: application/json"
   ```
   **Response:**
   ```json
-  { "message": "user logged in successfully", "token": "eyJhbGciOiJIUzI1NiIs..." }
+  { "token": "eyJhbGciOiJIUzI1NiIs..." }
   ```
 
 #### Events
